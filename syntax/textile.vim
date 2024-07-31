@@ -78,8 +78,16 @@ if version >= 508 || !exists("did_txt_syn_inits")
     HiLink txtListNumber2 Constant
     HiLink txtLink String
     HiLink txtCode Identifier
-    hi def txtEmphasis term=underline cterm=underline gui=italic
+    HiLink txtCite Keyword
+    HiLink txtSuper Special
+    HiLink txtSub Special
+    HiLink txtSpan String
+    HiLink txtFootnoteRef Tag
+    HiLink txtFootnoteDef Tag
+    hi def txtEmphasis term=underline,italic cterm=underline,italic gui=italic
     hi def txtBold term=bold cterm=bold gui=bold
+    hi def txtDeleted term=strikethrough cterm=strikethrough gui=strikethrough
+    hi def txtInserted term=underline cterm=underline gui=underline
 
     delcommand HiLink
 endif
