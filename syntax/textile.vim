@@ -25,16 +25,16 @@ syn case match
 " Textile syntax: <http://textism.com/tools/textile/>
 
 " Inline elements.
-syn region txtEmphasis    start='\(^\|[[:space:]*\-+^~(]\)\zs_[^[:space:]_]'  end='_\ze\([[:space:]*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtBold        start='\(^\|[[:space:]_\-+^~(]\)\zs\*[^[:space:]*]' end='\*\ze\([[:space:]_\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtCite        start='\(^\|[[:space:]_*\-+^~(]\)\zs??[^[:space:]]' end='??\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtDeleted     start='\(^\|[[:space:]_*+^~(]\)\zs-[^[:space:]-]'   end='-\ze\([[:space:]_*+^~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtInserted    start='\(^\|[[:space:]_*\-^~(]\)\zs+[^[:space:]+]'  end='+\ze\([[:space:]_*\-^~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtSuper       start='\(^\|[[:space:]_*\-+~(]\)\zs\^[^[:space:]^]' end='\^\ze\([[:space:]_*\-+~.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtSub         start='\(^\|[[:space:]_*\-+^(]\)\zs\~[^[:space:]~]' end='\~\ze\([[:space:]_*\-+^.,:;/<()[\]{}!?"''#&]\|$\)'
-syn region txtSpan        start='\(^\|[[:space:]_*\-+^~(]\)\zs%[^[:space:]%]' end='%\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn match  txtEmphasis    /\(^\|[[:space:]*\-+^~(]\)\zs_\([^[:space:]_]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?_\ze\([[:space:]*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)/
+syn match  txtBold        /\(^\|[[:space:]_\-+^~(]\)\zs\*\([^[:space:]*]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?\*\ze\([[:space:]_\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtCite        /\(^\|[[:space:]_*\-+^~(]\)\zs??\([^[:space:]]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\???\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtDeleted     /\(^\|[[:space:]_*+^~(]\)\zs-\([^[:space:]-]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?-\ze\([[:space:]_*+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtInserted    /\(^\|[[:space:]_*\-^~(]\)\zs+\([^[:space:]+]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?+\ze\([[:space:]_*\-^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtSuper       /\(^\|[[:space:]_*\-+~(]\)\zs\^\([^[:space:]^]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?\^\ze\([[:space:]_*\-+~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtSub         /\(^\|[[:space:]_*\-+^(]\)\zs\~\([^[:space:]~]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?\~\ze\([[:space:]_*\-+^.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match  txtSpan        /\(^\|[[:space:]_*\-+^~(]\)\zs%\([^[:space:]%]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?%\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
 syn match  txtFootnoteRef /\[[0-9]\+]/
-syn region txtCode        start='@' end='@'
+syn match  txtCode        /@\([^[:space:]@]\|\n\).\{-}\(\n\s*[^[:space:]].\{-}\)*\n\?@/
 syn region txtCode        start='<code\(\s[^>]*\)\?>' end='</code>'
 
 " Block elements.
