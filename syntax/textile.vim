@@ -25,14 +25,14 @@ syn case match
 " Textile syntax: <http://textism.com/tools/textile/>
 
 " Inline elements.
-syn match txtEmphasis    /_[^_]\+_/
-syn match txtBold        /\*[^*]\+\*/
-syn match txtCite        /??.\+??/
-syn match txtDeleted     /-[^-]\+-/
-syn match txtInserted    /+[^+]\++/
-syn match txtSuper       /\^[^^]\+\^/
-syn match txtSub         /\~[^~]\+\~/
-syn match txtSpan        /%[^%]\+%/
+syn match txtEmphasis    /\(^\|[[:space:]*\-+^~(]\)\zs_[^_]\+_\ze\([[:space:]*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtBold        /\(^\|[[:space:]_\-+^~(]\)\zs\*[^*]\+\*\ze\([[:space:]_\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtCite        /\(^\|[[:space:]_*\-+^~(]\)\zs??.\+??\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtDeleted     /\(^\|[[:space:]_*+^~(]\)\zs-[^-]\+-\ze\([[:space:]_*+^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtInserted    /\(^\|[[:space:]_*\-^~(]\)\zs+[^+]\++\ze\([[:space:]_*\-^~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtSuper       /\(^\|[[:space:]_*\-+~(]\)\zs\^[^^]\+\^\ze\([[:space:]_*\-+~.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtSub         /\(^\|[[:space:]_*\-+^(]\)\zs\~[^~]\+\~\ze\([[:space:]_*\-+^.,:;/<()[\]{}!?"'#&]\|$\)/
+syn match txtSpan        /\(^\|[[:space:]_*\-+^~(]\)\zs%[^%]\+%\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
 syn match txtFootnoteRef /\[[0-9]\+]/
 syn match txtCode        /@[^@]\+@/
 
