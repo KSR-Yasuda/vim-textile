@@ -25,27 +25,29 @@ syn case match
 " Textile syntax: <http://textism.com/tools/textile/>
 
 " Inline elements.
-syn match txtEmphasis    /\(^\|[[:space:]*\-+^~(]\)\zs_[^_]\+_\ze\([[:space:]*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtBold        /\(^\|[[:space:]_\-+^~(]\)\zs\*[^*]\+\*\ze\([[:space:]_\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtCite        /\(^\|[[:space:]_*\-+^~(]\)\zs??.\+??\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtDeleted     /\(^\|[[:space:]_*+^~(]\)\zs-[^-]\+-\ze\([[:space:]_*+^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtInserted    /\(^\|[[:space:]_*\-^~(]\)\zs+[^+]\++\ze\([[:space:]_*\-^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtSuper       /\(^\|[[:space:]_*\-+~(]\)\zs\^[^^]\+\^\ze\([[:space:]_*\-+~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtSub         /\(^\|[[:space:]_*\-+^(]\)\zs\~[^~]\+\~\ze\([[:space:]_*\-+^.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtSpan        /\(^\|[[:space:]_*\-+^~(]\)\zs%[^%]\+%\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"'#&]\|$\)/
-syn match txtFootnoteRef /\[[0-9]\+]/
-syn match txtCode        /@[^@]\+@/
+syn region txtEmphasis    start='\(^\|[[:space:]*\-+^~(]\)\zs_[^[:space:]_]'  end='_\ze\([[:space:]*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtBold        start='\(^\|[[:space:]_\-+^~(]\)\zs\*[^[:space:]*]' end='\*\ze\([[:space:]_\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtCite        start='\(^\|[[:space:]_*\-+^~(]\)\zs??[^[:space:]]' end='??\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtDeleted     start='\(^\|[[:space:]_*+^~(]\)\zs-[^[:space:]-]'   end='-\ze\([[:space:]_*+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtInserted    start='\(^\|[[:space:]_*\-^~(]\)\zs+[^[:space:]+]'  end='+\ze\([[:space:]_*\-^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtSuper       start='\(^\|[[:space:]_*\-+~(]\)\zs\^[^[:space:]^]' end='\^\ze\([[:space:]_*\-+~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtSub         start='\(^\|[[:space:]_*\-+^(]\)\zs\~[^[:space:]~]' end='\~\ze\([[:space:]_*\-+^.,:;/<()[\]{}!?"''#&]\|$\)'
+syn region txtSpan        start='\(^\|[[:space:]_*\-+^~(]\)\zs%[^[:space:]%]' end='%\ze\([[:space:]_*\-+^~.,:;/<()[\]{}!?"''#&]\|$\)'
+syn match  txtFootnoteRef /\[[0-9]\+]/
+syn region txtCode        start='@' end='@'
+syn region txtCode        start='<code\(\s[^>]*\)\?>' end='</code>'
 
 " Block elements.
-syn match txtHeader      /^h1\. .\+/
-syn match txtHeader2     /^h2\. .\+/
-syn match txtHeader3     /^h[3-6]\..\+/
-syn match txtBlockquote  /^bq\./
-syn match txtFootnoteDef /^fn[0-9]\+\./
-syn match txtListBullet  /\v^\*+ /
-syn match txtListBullet2  /\v^(\*\*)+ /
-syn match txtListNumber  /\v^#+ /
-syn match txtListNumber2  /\v^(##)+ /
+syn match  txtHeader      /^h1\. .\+/
+syn match  txtHeader2     /^h2\. .\+/
+syn match  txtHeader3     /^h[3-6]\..\+/
+syn match  txtBlockquote  /^bq\./
+syn match  txtFootnoteDef /^fn[0-9]\+\./
+syn match  txtListBullet  /\v^\*+ /
+syn match  txtListBullet2 /\v^(\*\*)+ /
+syn match  txtListNumber  /\v^#+ /
+syn match  txtListNumber2 /\v^(##)+ /
+syn region txtCodeBlock   start='<pre\(\s[^>]*\)\?>' end='</pre>'
 
 syn cluster txtBlockElement contains=txtHeader,txtBlockElement,txtFootnoteDef,txtListBullet,txtListNumber
 
@@ -78,6 +80,7 @@ if version >= 508 || !exists("did_txt_syn_inits")
     HiLink txtListNumber2 Constant
     HiLink txtLink String
     HiLink txtCode Identifier
+    HiLink txtCodeBlock txtCode
     HiLink txtCite Keyword
     HiLink txtSuper Special
     HiLink txtSub Special
